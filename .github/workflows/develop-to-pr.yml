@@ -55,5 +55,5 @@ jobs:
           pr_body: |
             Build da aplicação Java e da imagem Docker concluídos com sucesso.
             O PR está pronto para revisão.
-          pr_label: "automação,docker"
+          pr_label: "automação,docker" 
           github_token: ${{ secrets.GITHUB_TOKEN }}
