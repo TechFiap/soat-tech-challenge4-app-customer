@@ -140,7 +140,7 @@ jobs:
           NEW_TAG: ${{ needs.build.outputs.tag }}
         run: |
          
-          sed -i "s/TAG/$NEW_TAG/g" infra/app/4_app_deployment.yml
+          sed -i "s/TAG/$NEW_TAG/g" infra/app/deployment.yml
 
       - name: Verificar valor da variavel imagem 
         run: |
@@ -148,7 +148,7 @@ jobs:
 
       - name: Fazer deploy da aplicação no EKS
         run: |
-          kubectl apply -f infra/app/1_app_namespace.yml
-          kubectl apply --validate=false -f infra/app
-          kubectl rollout status deployment/fastfood-api-deployment -n fastfood-app --timeout=180s
+          kubectl apply -f infra/namespace.yml
+          kubectl apply --validate=false -f infra
+          
           echo "Deploy realizado com sucesso!"
