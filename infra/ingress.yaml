@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: fastfood-customer-ingress
-  namespace: fastfood-app
+  namespace: ffastfood-customer
 spec:
   ingressClassName: nginx
   rules:
