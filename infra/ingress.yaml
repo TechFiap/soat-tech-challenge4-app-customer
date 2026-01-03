@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: fastfood-api-ingress
+  name: fastfood-customer-ingress
   namespace: fastfood-app
 spec:
   ingressClassName: nginx
@@ -12,6 +12,6 @@ spec:
         pathType: Prefix
         backend:  
           service:
-            name: fastfood-api-service
+            name: fastfood-customer-service
             port:
               number: 8080
