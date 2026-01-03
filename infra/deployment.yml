@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fastfood-api-deployment
-  namespace: fastfood-app
+  name: fastfood-customer
+  namespace: fastfood-customer
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fastfood-api
+      app: fastfood-customer
   template:
     metadata:
       labels:
-        app: fastfood-api
+        app: fastfood-customer
     spec:
-      serviceAccountName: fastfood-api-sa # IMPORTANTE: Service Account para autenticação com AWS
+      serviceAccountName: fastfood-customer-sa # IMPORTANTE: Service Account para autenticação com AWS
       containers:
-        - name: fastfood-api
-          image: 239409137076.dkr.ecr.us-east-1.amazonaws.com/develop:TAG
+        - name: fastfood-customer
+          image: 239409137076.dkr.ecr.us-east-1.amazonaws.com/customer:TAG
           #image: hmouraf/fastfood:tech_fase2
           #image: hmouraf/soat-tech-challenge-fast-food-app:feature-build
           ports:

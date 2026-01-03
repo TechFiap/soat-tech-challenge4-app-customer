@@ -13,6 +13,6 @@ RUN mvn clean package -DskipTests
 # Stage 2: Create the runtime image
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.jar customer.jar
 EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "customer.jar"]
