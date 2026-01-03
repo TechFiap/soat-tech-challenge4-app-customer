@@ -77,7 +77,7 @@ jobs:
           cache: 'maven'
 
       - name: Fazer o Build com Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file app-customer/pom.xml
 
       - name: Construir, Taguear e Enviar imagem para o ECR
         id: build-image
