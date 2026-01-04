@@ -129,7 +129,7 @@ jobs:
       - name: Ler nome do cluster do arquivo de ambiente
         id: get_cluster_name
         run: |
-          CLUSTER_NAME=$(grep -A 1 "prod:" infra/ambiente.yml | tail -n 1 | awk '{print $2}')
+          CLUSTER_NAME=$(grep -A 1 "prod:" ambiente.yml | tail -n 1 | awk '{print $2}')
           echo "name=$CLUSTER_NAME" >> $GITHUB_OUTPUT
 
       - name: Configurar kubectl para o cluster EKS
