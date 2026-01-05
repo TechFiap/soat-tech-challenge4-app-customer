@@ -16,7 +16,8 @@ spec:
       serviceAccountName: fastfood-customer-sa # IMPORTANTE: Service Account para autenticação com AWS
       containers:
         - name: fastfood-customer
-          image: 239409137076.dkr.ecr.us-east-1.amazonaws.com/customer:TAG
+          #image: 239409137076.dkr.ecr.us-east-1.amazonaws.com/customer:TAG
+          image: 239409137076.dkr.ecr.us-east-1.amazonaws.com/customer:039c29ed14e5ac746a08bd1aaa5f6e784c87f81a
           #image: hmouraf/fastfood:tech_fase2
           #image: hmouraf/soat-tech-challenge-fast-food-app:feature-build
           ports:
@@ -30,17 +31,17 @@ spec:
               cpu: "512m"      # Máximo de CPU que o container pode usar (0.5 cores)
           envFrom:
             - configMapRef:
-                name: fastfood-api-configmap
+                name: fastfood-customer-configmap
           env:
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: fastfood-api-secrets # <- Nome do segredo que o External Secrets irá criar
+                  name: fastfood-customer-secrets # <- Nome do segredo que o External Secrets irá criar
                   key: DATASOURCE_USERNAME
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: fastfood-api-secrets # <- Nome do segredo que o External Secrets irá criar
+                  name: fastfood-customer-secrets # <- Nome do segredo que o External Secrets irá criar
                   key: DATASOURCE_PASSWORD
           livenessProbe:
             httpGet:
