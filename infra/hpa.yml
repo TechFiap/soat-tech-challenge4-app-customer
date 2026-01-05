@@ -7,7 +7,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: fastfood-customer-deployment
+    name: fastfood-customer
 
   minReplicas: 1
   maxReplicas: 5
