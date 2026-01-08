@@ -24,14 +24,14 @@ public class DataRepository implements DataSource {
     //Devolve um DTO
     @Override
     public void saveCustomer(CustomerDto customerDto) {
-        String encryptedPassword = passwordEncoder.encode(customerDto.password());
+        String encryptedPassword = passwordEncoder.encode(customerDto.getPassword());
 
         CustomerEntity customerEntity = new CustomerEntity();
-        customerEntity.setId(customerDto.id());
-        customerEntity.setName(customerDto.name());
-        customerEntity.setEmail(customerDto.email());
+        customerEntity.setId(customerDto.getId());
+        customerEntity.setName(customerDto.getName());
+        customerEntity.setEmail(customerDto.getEmail());
         customerEntity.setPassword(encryptedPassword);
-        customerEntity.setCpf(customerDto.cpf());
+        customerEntity.setCpf(customerDto.getCpf());
 
         customerJpaRepository.save(customerEntity);
 
@@ -48,13 +48,11 @@ public class DataRepository implements DataSource {
         CustomerEntity entity = customerJpaRepository.findByCpf(cpf);
         if (entity == null) return null;
 
-        CustomerDto customerDto = new CustomerDto(
+        return new CustomerDto(
                 entity.getId(),
                 entity.getName(),
                 entity.getEmail(),
                 entity.getCpf(),
                 entity.getPassword());
-
-        return customerDto;
     }
 }
