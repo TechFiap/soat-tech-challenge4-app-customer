@@ -7,13 +7,7 @@ import com.soat_tech_challenge4.app_customer.core.gateways.CustomerGateway;
 
 import java.util.UUID;
 
-public class RegisterCustomerUseCase {
-
-    private final CustomerGateway customerGateway;
-
-    public RegisterCustomerUseCase(CustomerGateway customerGateway) {
-        this.customerGateway = customerGateway;
-    }
+public record RegisterCustomerUseCase(CustomerGateway customerGateway) {
 
     public Customer execute(CustomerRequestDto customerRequestDto) {
         boolean customerExists = this.customerGateway.existsByEmailOrCpf(customerRequestDto.getEmail(), customerRequestDto.getCpf());
