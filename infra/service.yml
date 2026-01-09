@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fastfood-customer-service
-  namespace: fastfood-customer
+  name: customer-service
+  namespace: customer
 spec:
   selector:
-    app: fastfood-customer
+    app: customer
   ports:
     - protocol: TCP
       port: 8080
