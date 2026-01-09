@@ -38,6 +38,7 @@ class CustomerResourceTest {
 
         // Assert
         assertEquals(201, result.getStatusCode().value());
+        assertNotNull(result.getBody());
         assertEquals(customerResponseDto.getCpf(), result.getBody().getCpf());
     }
 
@@ -46,8 +47,6 @@ class CustomerResourceTest {
         // Arrange
         CustomerRequestDto customerRequestDto = new CustomerRequestDto("Jhon", "jhondoe@gmail.com",
                 "12345678", "167.722.690-04");
-        CustomerDto mockCustomer = new CustomerDto("ad81af4a-c169-4c6b-be80-6ec5ba3409e1", "Jhon",
-                "jhondoe@gmail.com", "167.722.690-04", "123456");
 
         when(dataRepository.existsCustomerByEmailOrCpf(customerRequestDto.getEmail(), customerRequestDto.getCpf())).thenReturn(Boolean.TRUE);
 

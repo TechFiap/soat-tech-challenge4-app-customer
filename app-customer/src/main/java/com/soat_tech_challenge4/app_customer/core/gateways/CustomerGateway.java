@@ -5,13 +5,8 @@ import com.soat_tech_challenge4.app_customer.core.interfaces.DataSource;
 import com.soat_tech_challenge4.app_customer.core.interfaces.ICustomerGateway;
 import com.soat_tech_challenge4.app_customer.dtos.CustomerDto;
 
-public class CustomerGateway implements ICustomerGateway {
+public record CustomerGateway(DataSource dataSource) implements ICustomerGateway {
 
-    private final DataSource dataSource;
-
-    public CustomerGateway(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
     // Recebe uma entidade do Domain transforma em DTO para o dataSource.
     // O dataSource recebe o DTO e transforma em entity do JPA para salvar no banco.
     //Gateway retorna a entidade
@@ -29,9 +24,7 @@ public class CustomerGateway implements ICustomerGateway {
 
     @Override
     public boolean existsByEmailOrCpf(String email, String cpf) {
-        boolean result = dataSource.existsCustomerByEmailOrCpf(email, cpf);
-
-        return result;
+        return dataSource.existsCustomerByEmailOrCpf(email, cpf);
     }
 
     @Override
@@ -42,13 +35,11 @@ public class CustomerGateway implements ICustomerGateway {
             return null;
         }
 
-        Customer customer = new Customer(
-                customerDto.id(),
-                customerDto.name(),
-                customerDto.email(),
-                customerDto.password(),
-                customerDto.cpf());
-
-        return customer;
+        return new Customer(
+                customerDto.getId(),
+                customerDto.getName(),
+                customerDto.getEmail(),
+                customerDto.getPassword(),
+                customerDto.getCpf());
     }
 }
