@@ -1,17 +1,13 @@
 package com.soat_tech_challenge4.app_customer.core.entities;
 
 import com.soat_tech_challenge4.app_customer.application.exceptions.InvalidCpfException;
-import lombok.Builder;
-import lombok.Getter;
 
-@Getter
-@Builder
 public class Customer {
-    private String id;
-    private String name;
-    private String email;
-    private String password;
-    private String cpf;
+    private final String id;
+    private final String name;
+    private final String email;
+    private final String password;
+    private final String cpf;
 
     public Customer(String id, String name, String email, String password, String cpf) {
         this.id = id;
@@ -26,13 +22,35 @@ public class Customer {
         this.cpf = cpf;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
     public boolean validateCpf(String cpf) {
         if (cpf == null || cpf.isEmpty()) {
             return false;
         }
 
         // Remove non-numeric characters
-        cpf = cpf.replaceAll("[^0-9]", "");
+
+
+        cpf = cpf.replaceAll("\\D", "");
 
         // Check if it has 11 digits
         if (cpf.length() != 11) {
