@@ -4,13 +4,13 @@ import com.soat_tech_challenge4.app_customer.api.rest.dto.response.CustomerRespo
 import com.soat_tech_challenge4.app_customer.core.entities.Customer;
 
 public class CustomerPresenter {
-
+    private CustomerPresenter(){}
     public static CustomerResponseDto toDto(Customer customer) {
-        return new CustomerResponseDto().builder()
-                .id(customer.getId())
-                .name(customer.getName())
-                .email(customer.getEmail())
-                .cpf(customer.getCpf())
-                .build();
+        return new CustomerResponseDto(
+                customer.getId(),
+                customer.getName(),
+                customer.getEmail(),
+                customer.getCpf());
+
     }
 }

@@ -9,7 +9,7 @@ class CustomerEntityTest {
 
     @Test
     @DisplayName("Deve criar entidade usando construtor vazio e setters")
-    void shouldCreateEntityUsingEmptyConstructor() {
+    void shouldCreateEntityUsingNoArgsConstructor() {
         CustomerEntity entity = new CustomerEntity();
 
         entity.setId("1");
@@ -27,7 +27,7 @@ class CustomerEntityTest {
 
     @Test
     @DisplayName("Deve criar entidade usando construtor completo")
-    void shouldCreateEntityUsingFullConstructor() {
+    void shouldCreateEntityUsingAllArgsConstructor() {
         CustomerEntity entity = new CustomerEntity(
                 "1",
                 "Fabio",
