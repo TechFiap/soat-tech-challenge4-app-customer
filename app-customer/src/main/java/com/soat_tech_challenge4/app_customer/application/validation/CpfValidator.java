@@ -1,14 +1,14 @@
 package com.soat_tech_challenge4.app_customer.application.validation;
 
 public class CpfValidator {
-
+    private CpfValidator(){}
     public static boolean isValid(String cpf) {
         if (cpf == null || cpf.isEmpty()) {
             return false;
         }
 
         // Remove non-numeric characters
-        cpf = cpf.replaceAll("[^0-9]", "");
+        cpf = cpf.replaceAll("\\D", "");
 
         // Check if it has 11 digits
         if (cpf.length() != 11) {
