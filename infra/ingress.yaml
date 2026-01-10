@@ -4,14 +4,14 @@ metadata:
   name: customer-ingress
   namespace: customer-app
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    # Rewrite removido
 spec:
   ingressClassName: nginx
   rules:
   - http:
       paths:
-      - path: /customer(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /customers
+        pathType: Prefix
         backend:  
           service:
             name: customer-service
