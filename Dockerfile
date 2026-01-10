@@ -9,11 +9,12 @@ COPY app-customer/src ./src
 RUN mvn clean package -DskipTests
 
 # Download New Relic Agent
-RUN mkdir -p /app/newrelic
-RUN curl -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip \
-    && jar xf newrelic-java.zip \
+RUN apt-get update && apt-get install -y unzip curl \
+    && mkdir -p /app/newrelic \
+    && curl -L -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip \
+    && unzip newrelic-java.zip -d . \
     && mv newrelic/newrelic.jar /app/newrelic/newrelic.jar \
-    && rm newrelic-java.zip
+    && rm -rf newrelic-java.zip newrelic
 
 
 # Stage 2: Create the runtime image
