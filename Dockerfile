@@ -8,19 +8,20 @@ RUN mvn dependency:go-offline -B
 COPY app-customer/src ./src
 RUN mvn clean package -DskipTests
 
-# Download New Relic Agent
-RUN apt-get update && apt-get install -y unzip curl \
-    && mkdir -p /app/newrelic \
-    && curl -L -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip \
-    && unzip newrelic-java.zip -d . \
-    && mv newrelic/newrelic.jar /app/newrelic/newrelic.jar \
-    && rm -rf newrelic-java.zip newrelic
+# Stage 2: Download New Relic Agent (Dedicated Stage)
+FROM alpine:latest AS newrelic-agent
+RUN apk add --no-cache curl unzip
+WORKDIR /newrelic
+RUN curl -L -O https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip 
+    && unzip newrelic-java.zip 
+    && rm newrelic-java.zip
 
-
-# Stage 2: Create the runtime image
+# Stage 3: Create the runtime image
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar customer.jar
-COPY --from=builder /app/newrelic/newrelic.jar /app/newrelic/newrelic.jar
+# Copia o agente do stage dedicado
+COPY --from=newrelic-agent /newrelic/newrelic/newrelic.jar /app/newrelic/newrelic.jar
+
 EXPOSE 8080
 CMD ["java", "-javaagent:/app/newrelic/newrelic.jar", "-jar", "customer.jar"]
